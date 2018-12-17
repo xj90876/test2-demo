@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.IStudentDao">
+    <select id="selectAll" resultType="com.qf.pojo.Student">
+        SELECT * FROM tb_student
+    </select>
+
+    <insert id="saveStudent" parameterType="com.qf.pojo.Student">
+        INSERT INTO tb_student (name,age,sex,phone)VALUES (#{name},#{age},#{sex},#{phone})
+    </insert>
+
+    <delete id="remove" parameterType="com.qf.pojo.Student">
+        DELETE FROM tb_student WHERE id=#{id}
+    </delete>
+
+    <select id="selectById" parameterType="com.qf.pojo.Student" resultType="com.qf.pojo.Student">
+        SELECT *FROM tb_student WHERE id=#{id}
+    </select>
+
+    <update id="updateStudent" parameterType="com.qf.pojo.Student">
+        UPDATE tb_student SET name=#{name},age=#{age},sex=#{sex},phone=#{phone} WHERE id=#{id}
+    </update>
+    
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.qf.pojo.Student">
+    SELECT * FROM tb_student WHERE name LIKE '%${vo}%' limit #{startIndex},#{pageSize}
+</select>
+
+    <select id="selectTatol" resultType="int">
+        select count(*) from tb_student
+    </select>
+
+    <select id="findStudentsByPage" resultType="com.qf.pojo.Student">
+        select * from tb_student limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="selectByNameTatol" resultType="int">
+        select count(*) from tb_student where name LIKE '%${vo}%'
+    </select>
+</mapper>
